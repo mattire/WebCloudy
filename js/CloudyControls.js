@@ -113,8 +113,7 @@ THREE.CloudyControls = function ( _object, meshList, domElement ) {
 	}
 	
 	this.clickPositionGuess = function( distance, direction )
-	{
-		
+	{		
 		var targetDirVector = new THREE.Vector3(0,0,0);
 		var camPos 			= new THREE.Vector3(0,0,0);
 		targetDirVector.copy( this.targetPosition);

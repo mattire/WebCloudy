@@ -45,62 +45,7 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	
 	this.keyUpSkipList = ["toggleTransparency", "toggleLighting"];
 	
-	this.onMouseDown = function ( event ) {
 
-		if ( this.domElement !== document ) {
-			this.domElement.focus();
-		}
-
-		event.preventDefault();
-		event.stopPropagation();
-		
-		if ( this.activeLook ) {
-
-			switch ( event.button ) {
-				case 0: this.rayCastGet(event); break;
-				//case 0: this.displayObjectInfo = true; break;
-/*
-				case 0: this.moveForward = true; break;
-				case 2: this.moveBackward = true; break;
-	//*/
-			}
-
-		}
-
-		this.mouseDragOn = true;
-
-	};
-
-	this.onMouseUp = function ( event ) {
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		/*
-		if ( this.activeLook ) {
-
-			switch ( event.button ) {
-
-				case 0: this.moveForward = false; break;
-				case 2: this.moveBackward = false; break;
-
-			}
-
-		}
-		
-		this.mouseDragOn = false;
-		//*/
-	};
-
-	this.onMouseMove = function ( event ) {
-		if ( this.domElement === document ) {
-			this.mouseX = event.pageX - this.viewHalfX;
-			this.mouseY = event.pageY - this.viewHalfY;
-		} else {
-			this.mouseX = event.pageX - this.domElement.offsetLeft - this.viewHalfX;
-			this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
-		}
-	};
 
 	this.onKeyDown = function ( event ) {
 
@@ -141,26 +86,14 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 
 	this.dispose = function() {
 
-		this.domElement.removeEventListener( 'contextmenu', contextmenu, false );
-		this.domElement.removeEventListener( 'mousedown', _onMouseDown, false );
-		this.domElement.removeEventListener( 'mousemove', _onMouseMove, false );
-		this.domElement.removeEventListener( 'mouseup', _onMouseUp, false );
-
+		//this.domElement.removeEventListener( 'contextmenu', contextmenu, false );
 		window.removeEventListener( 'keydown', _onKeyDown, false );
 		window.removeEventListener( 'keyup', _onKeyUp, false );
-
 	}
 
-	// var _onMouseMove = bind( this, this.onMouseMove );
-	// var _onMouseDown = bind( this, this.onMouseDown );
-	// var _onMouseUp = bind( this, this.onMouseUp );
 	var _onKeyDown = bind( this, this.onKeyDown );
 	var _onKeyUp = bind( this, this.onKeyUp );
 
-	//this.domElement.addEventListener( 'contextmenu', contextmenu, false );
-	// this.domElement.addEventListener( 'mousemove', _onMouseMove, false );
-	// this.domElement.addEventListener( 'mousedown', _onMouseDown, false );
-	// this.domElement.addEventListener( 'mouseup', _onMouseUp, false );
 
 	window.addEventListener( 'keydown', _onKeyDown, false );
 	window.addEventListener( 'keyup', _onKeyUp, false );

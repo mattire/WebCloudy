@@ -34,6 +34,8 @@ function CloudyScene(scene_, colladaFile_) {
 			dae.traverse(function (child) {
 				if (child instanceof THREE.Mesh) {
 					console.log("It's a mesh!");
+					child.castShadow = true;
+					child.receiveShadow = true;
 					self.meshList.push(child);
 					
 				}	
@@ -57,12 +59,23 @@ function CloudyScene(scene_, colladaFile_) {
 		directionalLight.position.y = Math.random() - 0.5;
 		directionalLight.position.z = Math.random() - 0.5;
 		directionalLight.position.normalize();
-		var ambientLight = new THREE.AmbientLight(0xcccccc);
-		var particleLight = new THREE.Mesh(new THREE.SphereGeometry(14, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
-		// this.scene.add(directionalLight);
+		var ambientLight 	= new THREE.AmbientLight(0xcccccc);
+		var particleLight 	= new THREE.Mesh(new THREE.SphereGeometry(14, 8, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+		var hemiLight 		= new THREE.HemisphereLight( 0x0000ff, 0x00ff00, 0.6 ); 
+		//var spotLight = new THREE.SpotLight( 0x0000ff, 0x00ff00, 0.6 ); 
+		
+		
 		this.lightList.push(ambientLight);
 		this.lightList.push(directionalLight);
 		this.lightList.push(particleLight);
+		this.lightList.push(hemiLight);
+		this.lightList.forEach(function(light){
+			light.castShadow	= true;
+			light.shadowDarkness = 0.5;
+			light.shadowCameraVisible = true;
+			//light.receiveShadow	= true;
+		});
+		
 		this.scene.add(new THREE.AmbientLight(0xcccccc));
 	} 
 	
@@ -71,7 +84,8 @@ function CloudyScene(scene_, colladaFile_) {
 		this.meshList.forEach(
 			function (mesh, index){
 				var edges = new THREE.EdgesHelper( mesh, 0x000000);
-				edges.material.linewidth = 16;
+				// edges.material.linewidth = 16;
+				edges.material.linewidth = 32;
 				self.scene.add(edges);
 				self.edgeList.push(edges)
 			}

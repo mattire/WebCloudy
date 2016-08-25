@@ -21,7 +21,7 @@
 	<script src="../build/three.js"></script>
 	<script src="../js/loaders/ColladaLoader.js"></script>
 	<script src="../js/CloudyScene.js"></script>
-	<!-- <script src="../js/CloudyControls.js"></script> -->
+	<script src="../js/CloudyMouseControls.js"></script>
 	<script src="../js/CloudyCameraControls.js"></script>
 	<script src="../js/CloudyKeyControls.js"></script>
 	<script>
@@ -31,6 +31,18 @@
 		//renderer = new THREE.WebGLRenderer({alpha: true});
 		renderer = new THREE.WebGLRenderer();
 		renderer.setSize( window.innerWidth, window.innerHeight );
+		
+		renderer.shadowMapEnabled = true;
+		renderer.shadowMapSoft = true;
+
+		renderer.shadowCameraNear = 3;
+		renderer.shadowCameraFar = camera.far;
+		renderer.shadowCameraFov = 50;
+
+		renderer.shadowMapBias = 0.0039;
+		renderer.shadowMapDarkness = 0.5;
+		renderer.shadowMapWidth = 1024;
+		renderer.shadowMapHeight = 1024;
 		
 		document.body.appendChild( renderer.domElement );
 
@@ -44,7 +56,8 @@
 		
 		camera.position.z = 15
 		cloydycamera = new THREE.CloudyCameraControls(camera, null);
-		controls = new THREE.CloudyKeyControls(cloydycamera, cs);
+		controls	 = new THREE.CloudyKeyControls(cloydycamera, cs);
+		mouseControls = new CloudyMouseControls(cs, cloydycamera);
 		
 		renderer.setClearColor( 0x44aaff, 1);		
 		
