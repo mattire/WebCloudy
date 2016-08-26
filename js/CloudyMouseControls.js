@@ -74,6 +74,14 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 		
 	}
 
+	this.showContextMenu = function( event ) {
+		var contextMenu = document.getElementById('contextMenu');
+		contextMenu.style.display = 'block';
+		contextMenu.style.left = event.clientX + 'px';
+		contextMenu.style.top = event.clientY + 'px';
+		//return false;
+	}
+	
 	this.onMouseDown = function ( event ) {
 		isShift = !!window.event.shiftKey;
 		if(isShift){
@@ -93,7 +101,12 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 					this.addBox(event); 
 					//alert("here");
 					break;
-					
+				case 2:
+					//alert("here");
+					this.showContextMenu(event);
+					event.preventDefault();
+					event.stopPropagation();
+					break;
 				//case 0: this.displayObjectInfo = true; break;
 /*
 				case 0: this.moveForward = true; break;
@@ -103,8 +116,8 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 
 		// }
 
-		this.mouseDragOn = true;
-
+		//this.mouseDragOn = true;
+		return true;
 	};
 
 	this.onMouseUp = function ( event ) {
@@ -124,22 +137,28 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 		
 		this.updateRayCast(event);
 	};
+	
+	this.onContextMenu = function (event){
+		return false;
+	}
 
 	this.dispose = function() {
 		this.domElement.removeEventListener( 'mousedown', _onMouseDown, false );
 		this.domElement.removeEventListener( 'mousemove', _onMouseMove, false );
 		this.domElement.removeEventListener( 'mouseup', _onMouseUp, false );
+		this.domElement.removeEventListener( 'oncontextmenu', _onContextMenu, false );
 
 	}
 
 	var _onMouseMove 	= bind( this, this.onMouseMove );
 	var _onMouseDown 	= bind( this, this.onMouseDown );
 	var _onMouseUp 		= bind( this, this.onMouseUp );
-
+	var _onContextMenu  = bind( this, this.onContextMenu );
 	
 	this.domElement.addEventListener( 'mousemove', _onMouseMove, false );
 	this.domElement.addEventListener( 'mousedown', _onMouseDown, false );
 	this.domElement.addEventListener( 'mouseup', _onMouseUp, false );
+	this.domElement.addEventListener( 'oncontextmenu', _onContextMenu, false );
 	
 
 	

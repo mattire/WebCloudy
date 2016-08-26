@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Web cloudy </title>
+	<link rel="stylesheet" type="text/css" href="../css/ContextMenu.css">
 	<style type="text/css">
 		BODY
 		{
@@ -18,6 +19,7 @@
 	</style>
 </head>
 <body>
+
 	<script src="../build/three.js"></script>
 	<script src="../js/loaders/ColladaLoader.js"></script>
 	<script src="../js/CloudyScene.js"></script>
@@ -25,6 +27,14 @@
 	<script src="../js/CloudyCameraControls.js"></script>
 	<script src="../js/CloudyKeyControls.js"></script>
 	<script>
+		window.oncontextmenu = function () { return false; }
+
+		function onContextMenuClick(event){
+			//alert('cntx');
+			//alert(event.target.innerHTML);
+			var contextMenu = document.getElementById('contextMenu');
+			contextMenu.style.display = 'none';
+		}
 		
 		var scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -88,6 +98,18 @@
 		
 		render();
 	</script>
-
+	<div class="container" oncontextmenu="return showContextMenu(event);">
+		<div id="contextMenu" class="context-menu">
+			<ul onclick=onContextMenuClick(event);>
+				<li>Add a event listener</li>
+				<li>Disble default behaviour</li>
+				<li>Design context menu</li>
+				<li>Show the context menu</li>
+				<li class="separator"></li>
+				<li>Hide on mouse click</li>
+				<li>Hide on escape key</li>
+			</ul>
+		</div>
+	</div>
 </body>
 </html>
