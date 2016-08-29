@@ -84,8 +84,9 @@ function CloudyScene(scene_, colladaFile_) {
 		this.meshList.forEach(
 			function (mesh, index){
 				var edges = new THREE.EdgesHelper( mesh, 0x000000);
-				// edges.material.linewidth = 16;
-				edges.material.linewidth = 32;
+				edges.material.linewidth = 8;
+			    // edges.material.linewidth = 32;
+				// edges.material.linewidth = 64;
 				self.scene.add(edges);
 				self.edgeList.push(edges)
 			}

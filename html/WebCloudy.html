@@ -2,6 +2,7 @@
 <head>
 	<title>Web cloudy </title>
 	<link rel="stylesheet" type="text/css" href="../css/ContextMenu.css">
+    <link rel="stylesheet" type="text/css" href="../css/OtherControls.css">
 	<style type="text/css">
 		BODY
 		{
@@ -20,96 +21,123 @@
 </head>
 <body>
 
-	<script src="../build/three.js"></script>
-	<script src="../js/loaders/ColladaLoader.js"></script>
-	<script src="../js/CloudyScene.js"></script>
-	<script src="../js/CloudyMouseControls.js"></script>
-	<script src="../js/CloudyCameraControls.js"></script>
-	<script src="../js/CloudyKeyControls.js"></script>
-	<script>
-		window.oncontextmenu = function () { return false; }
+    <script src="../build/three.js"></script>
+    <script src="../js/loaders/ColladaLoader.js"></script>
+    <script src="../js/CloudyScene.js"></script>
+    <script src="../js/CloudyMouseControls.js"></script>
+    <script src="../js/CloudyCameraControls.js"></script>
+    <script src="../js/CloudyKeyControls.js"></script>
+    <script src="../js/DisplaysManager.js"></script>
+    <script>
+        dpManager = new DisplayManager();
+        window.oncontextmenu = function () { return false; }
 
-		function onContextMenuClick(event){
-			//alert('cntx');
-			//alert(event.target.innerHTML);
-			var contextMenu = document.getElementById('contextMenu');
-			contextMenu.style.display = 'none';
-		}
-		
-		var scene = new THREE.Scene();
-		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-		//renderer = new THREE.WebGLRenderer({alpha: true});
-		renderer = new THREE.WebGLRenderer();
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		
-		renderer.shadowMapEnabled = true;
-		renderer.shadowMapSoft = true;
+        function onContextMenuClick(event) {
+            //alert('cntx');
+            //alert(event.target.innerHTML);
+            dpManager.menuItemClicked(event.target.innerHTML);
+            var contextMenu = document.getElementById('contextMenu');
+            contextMenu.style.display = 'none';
+        }
 
-		renderer.shadowCameraNear = 3;
-		renderer.shadowCameraFar = camera.far;
-		renderer.shadowCameraFov = 50;
+        var scene = new THREE.Scene();
+        //camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
+        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+        //renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
-		renderer.shadowMapBias = 0.0039;
-		renderer.shadowMapDarkness = 0.5;
-		renderer.shadowMapWidth = 1024;
-		renderer.shadowMapHeight = 1024;
-		
-		document.body.appendChild( renderer.domElement );
+        renderer.shadowMapEnabled = true;
+        renderer.shadowMapSoft = true;
 
-		var cs = new CloudyScene(scene,"../models/out00.dae");
-		cs.init();		
-		
-		var geometry = new THREE.BoxGeometry(1,1,1);
-		var material = new THREE.MeshBasicMaterial({color:0x00ff00});
-		var cube = new THREE.Mesh(geometry, material);
-		scene.add(cube);
-		
-		camera.position.z = 15
-		cloydycamera = new THREE.CloudyCameraControls(camera, null);
-		controls	 = new THREE.CloudyKeyControls(cloydycamera, cs);
-		mouseControls = new CloudyMouseControls(cs, cloydycamera);
-		
-		renderer.setClearColor( 0x44aaff, 1);		
-		
-		var onWindowResize = function() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize(window.innerWidth, window.innerHeight);
-		}
-		
-		window.addEventListener('resize', onWindowResize, false);
-		
-		var clock = new THREE.Clock();
-		
-		var render = function() {
-			setTimeout(function () {
-				requestAnimationFrame(render);
-			}, 50);
+        renderer.shadowCameraNear = 3;
+        renderer.shadowCameraFar = camera.far;
+        renderer.shadowCameraFov = 50;
 
-			//controls.update(clock.getDelta());
-			delta = clock.getDelta()
-			cloydycamera.update(delta);
-			cs.update(delta);
-			//requestAnimationFrame(render);
-			cube.rotation.x += 0.1;
-			cube.rotation.y += 0.1;
-			renderer.render(scene, camera);
-		}
-		
-		render();
-	</script>
-	<div class="container" oncontextmenu="return showContextMenu(event);">
-		<div id="contextMenu" class="context-menu">
-			<ul onclick=onContextMenuClick(event);>
-				<li>Add a event listener</li>
-				<li>Disble default behaviour</li>
-				<li>Design context menu</li>
-				<li>Show the context menu</li>
-				<li class="separator"></li>
-				<li>Hide on mouse click</li>
-				<li>Hide on escape key</li>
-			</ul>
-		</div>
-	</div>
+        renderer.shadowMapBias = 0.0039;
+        renderer.shadowMapDarkness = 0.5;
+        renderer.shadowMapWidth = 1024;
+        renderer.shadowMapHeight = 1024;
+
+        document.body.appendChild(renderer.domElement);
+
+        //var cs = new CloudyScene(scene, "../models/out00.dae");
+        var cs = new CloudyScene(scene, "../models/out00.xml");
+        cs.init();
+
+        var geometry = new THREE.BoxGeometry(1, 1, 1);
+        var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 15
+        cloydycamera = new THREE.CloudyCameraControls(camera, null);
+        controls = new THREE.CloudyKeyControls(cloydycamera, cs);
+        mouseControls = new CloudyMouseControls(cs, cloydycamera);
+
+        renderer.setClearColor(0x44aaff, 1);
+
+        var onWindowResize = function () {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        var clock = new THREE.Clock();
+
+        var render = function () {
+            setTimeout(function () {
+                requestAnimationFrame(render);
+            }, 50);
+
+            //controls.update(clock.getDelta());
+            delta = clock.getDelta()
+            cloydycamera.update(delta);
+            cs.update(delta);
+            //requestAnimationFrame(render);
+            cube.rotation.x += 0.1;
+            cube.rotation.y += 0.1;
+            renderer.render(scene, camera);
+        }
+
+        render();
+    </script>
+    <!--<div class="container" oncontextmenu="return showContextMenu(event);">-->
+    <div class="container">
+        <div id="contextMenu" class="context-menu">
+            <ul onclick=onContextMenuClick(event);>
+                <li>Show key controls list</li>
+                <li>Add sensor here</li>
+                <li>Add controller here</li>
+                <li>Show location</li>
+                <li class="separator"></li>
+                <li>Hide on mouse click</li>
+                <li>Hide on escape key</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div id="controlsList" class="controls-list">
+            <b>Move:</b><br>
+            Forward - w or up arrow<br>
+            Backward - s or down arrow<br>
+            Right - s or right arrow<br>
+            Left - a or left arrow<br>
+            Up - r<br />
+            Down -f<br />
+            <b>Turn:</b><br>
+            Up - shift + w or numpad 8<br>
+            Down - shift + s or numpad 2<br>
+            Right - shift + d or numpad 6<br>
+            Left - shift + a or numpad 4<br>
+        </div>
+    </div>
+    <div class="container">
+        <div id="dynamicInfo" class="dynamic-info">
+
+        </div>
+    </div>
 </body>
 </html>

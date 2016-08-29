@@ -8,7 +8,9 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	this.toggleTransparency = false;
 
 	this.keyControls = { 
-					49: ["cloudyCam", "incSpeed"], /*1*/
+	    27: ["this", "hideContextMenu"], /*Esc*/
+	    93: ["this", "showContextMenu"], /*context key*/
+	                49: ["cloudyCam", "incSpeed"], /*1*/
 					50: ["cloudyCam", "decSpeed"], /*2*/ 
 					51: ["cloudyCam", "incLookSpeed"], /*3*/
 					52: ["cloudyCam", "decLookSpeed"], /*4*/
@@ -43,7 +45,7 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 					68: "turnRight" /*D*/
 	};
 	
-	this.keyUpSkipList = ["toggleTransparency", "toggleLighting"];
+	this.keyUpSkipList = ["toggleTransparency", "toggleLighting", "hideContextMenu", "showContextMenu"];
 	
 
 
@@ -55,8 +57,12 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	    console.log(event.keyCode);
 		if(!isShift && !isCtrl){
 			list = this.keyControls[event.keyCode];
-			if(list!=undefined){
-				this[list[0]][list[1]] = true;
+			if (list != undefined) {
+			    if (list[0] == "this") {
+			        this[list[1]]();
+			    } else {
+    				this[list[0]][list[1]] = true;
+			    }
 			}
 		} 
 		if (isShift && !isCtrl) {
@@ -71,7 +77,7 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 		isCtrl  = !!window.event.ctrlKey; // typecast to boolean		// 		 CAUSES COMPLICATIONS
 		if(!isShift){
 			list = this.keyControls[event.keyCode];
-			if(list!=undefined){
+			if (list != undefined) {
 				if(this.keyUpSkipList.indexOf(list[1])==-1){
 					this[list[0]][list[1]] = false;
 				} 
@@ -83,6 +89,20 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 		}
 	};
 
+	this.hideContextMenu = function () {
+	    var menu = document.getElementById("contextMenu");
+	    menu.style.display = 'none';
+	}
+
+	this.showContextMenu = function () {
+	    var menu = document.getElementById("contextMenu");
+	    //menu.style.margin = 'auto';
+	    
+	    contextMenu.style.left = document.body.offsetWidth / 2 + 'px';
+	    contextMenu.style.left = document.body.offsetHeight / 2 + 'px';
+	    contextMenu.style.top = '50px';
+	    menu.style.display = 'block';
+	}
 
 	this.dispose = function() {
 

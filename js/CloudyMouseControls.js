@@ -24,7 +24,6 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 		this.cloudyScene.cloydyDevices.push(box);
 	}
 
-	
 	this.addBox = function(event)
 	{
 		var pos = this.rayCastGet(event);
@@ -126,7 +125,9 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 		event.stopPropagation();
 	};
 
-	this.onMouseMove = function ( event ) {
+	this.onMouseMove = function (event) {
+
+	    //console.log('Mouse moved');
 		// if ( this.domElement === document ) {
 			// this.mouseX = event.pageX - this.viewHalfX;
 			// this.mouseY = event.pageY - this.viewHalfY;
