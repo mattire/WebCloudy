@@ -82,7 +82,8 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 	}
 	
 	this.onMouseDown = function ( event ) {
-		isShift = !!window.event.shiftKey;
+	    //isShift = !!window.event.shiftKey;
+	    isShift = !!event.shiftKey;
 		if(isShift){
 			alert("here");
 		}

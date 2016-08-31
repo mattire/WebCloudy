@@ -224,7 +224,7 @@ THREE.CloudyControls = function ( _object, meshList, domElement ) {
 
 	this.onKeyDown = function ( event ) {
 
-		isShift = !!window.event.shiftKey; // typecast to boolean
+	    isShift = !!event.shiftKey; // typecast to boolean
 		//event.preventDefault();
 	    console.log(event.keyCode);
 		if(!isShift){
@@ -273,7 +273,7 @@ THREE.CloudyControls = function ( _object, meshList, domElement ) {
 
 	this.onKeyUp = function ( event ) {
 
-		isShift = !!window.event.shiftKey; // typecast to boolean	
+	    isShift = !!event.shiftKey; // typecast to boolean	
 		if(!isShift){
 			switch ( event.keyCode ) {
 

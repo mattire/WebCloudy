@@ -51,8 +51,9 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 
 	this.onKeyDown = function ( event ) {
 
-		isShift = !!window.event.shiftKey; // typecast to boolean
-		isCtrl  = !!window.event.ctrlKey; // typecast to boolean
+		isShift = !!event.shiftKey; // typecast to boolean
+		isCtrl = !!event.ctrlKey; // typecast to boolean
+
 		//event.preventDefault();
 	    console.log(event.keyCode);
 		if(!isShift && !isCtrl){
@@ -73,8 +74,9 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 
 	this.onKeyUp = function ( event ) {
 
-		isShift = !!window.event.shiftKey; // typecast to boolean		// NOTE: RELEASING CTRL OR SHIFT KEY BEFORE OTHER KEY
-		isCtrl  = !!window.event.ctrlKey; // typecast to boolean		// 		 CAUSES COMPLICATIONS
+		isShift = !!event.shiftKey; // typecast to boolean		// NOTE: RELEASING CTRL OR SHIFT KEY BEFORE OTHER KEY
+		isCtrl = !!event.ctrlKey; // typecast to boolean		// 		 CAUSES COMPLICATIONS
+
 		if(!isShift){
 			list = this.keyControls[event.keyCode];
 			if (list != undefined) {
