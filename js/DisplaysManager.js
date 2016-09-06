@@ -13,7 +13,7 @@
 
     this.toggleDisplay = function (elementId) {
         var disp = document.getElementById(elementId);
-        if (disp.style.display == 'block') {
+        if (disp.style.display == 'block' || disp.style.display == "") {
             disp.style.display = 'none';
         } else {
             disp.style.display = 'block';

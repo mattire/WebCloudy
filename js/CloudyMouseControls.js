@@ -46,10 +46,6 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 	
 	this.rayCastGet = function( event )
 	{
-		// var mouse = new THREE.Vector2();
-		// mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		// mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		// this.raycaster.setFromCamera( mouse, this.cloudyCam.object );
 		
 		var intersects = this.raycaster.intersectObjects( this.cloudyScene.meshList );
 		
@@ -82,7 +78,6 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 	}
 	
 	this.onMouseDown = function ( event ) {
-	    //isShift = !!window.event.shiftKey;
 	    isShift = !!event.shiftKey;
 		if(isShift){
 			alert("here");
@@ -137,7 +132,15 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 			// this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
 		// }
 		
-		this.updateRayCast(event);
+	    this.updateRayCast(event);
+
+	    var devIntersects = this.raycaster.intersectObjects(this.cloudyScene.cloydyDevices);
+	    if (devIntersects.length > 0) {
+
+	        devUnderMouse = devIntersects[0].object;
+	        console.log(devUnderMouse.name);
+	    }
+
 	};
 	
 	this.onContextMenu = function (event){
