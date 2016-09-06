@@ -20,4 +20,18 @@
         }
     }
 
+    this.setDisplay = function (id, disp) {
+        var dis = document.getElementById(id);
+        dis.style.display = disp;
+    }
+
+    this.setDynamicInfoTextAndPosition = function (txt, posX, posY) {
+        var dInfo = document.getElementById("dynamicInfo");
+        dInfo.innerText = "";
+        var content = document.createTextNode(txt);
+        dInfo.appendChild(content);
+        dInfo.style.left = posX + 'px';
+        dInfo.style.top = posY + 'px';
+    }
+
 }

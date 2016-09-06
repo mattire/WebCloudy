@@ -1,17 +1,19 @@
 
 
 
-function CloudyMouseControls(cScene, cCam, domElement ) {
+function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 	
 	this.cloudyScene = cScene;
 	this.cloudyCam = cCam;
-	
+	this.displayManager = dpManager;
+
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
 	
 	this.raycaster = new THREE.Raycaster();
 
 	this.mouseX = 0;
 	this.mouseY = 0;
+	this.lastObjUnderMouse = null;
 
 	this.addCube = function(position)
 	{
@@ -136,9 +138,17 @@ function CloudyMouseControls(cScene, cCam, domElement ) {
 
 	    var devIntersects = this.raycaster.intersectObjects(this.cloudyScene.cloydyDevices);
 	    if (devIntersects.length > 0) {
-
 	        devUnderMouse = devIntersects[0].object;
-	        console.log(devUnderMouse.name);
+	        if (devUnderMouse != this.lastObjUnderMouse) {
+	            this.lastObjUnderMouse = devUnderMouse;
+	            console.log(devUnderMouse.name);
+	            //event.clientX
+	            this.displayManager.setDynamicInfoTextAndPosition(devUnderMouse.name, event.clientX, event.clientY);
+	            this.displayManager.setDisplay("dynamicInfo", 'block');
+	        }
+	    } else {
+	        this.lastObjUnderMouse = null;
+	        this.displayManager.setDisplay("dynamicInfo", 'none');
 	    }
 
 	};

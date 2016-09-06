@@ -12,9 +12,12 @@
 
 .dynamic-info{
     font-size: 20px;
-    margin: auto;
+    position: absolute;
+    top: 40px;
+    left: 20;
+    /*margin: auto;*/
     width: 340px;
     height: 300px;
     border: 3px solid #73AD21;
-    display: none;
+    display: block;
 }

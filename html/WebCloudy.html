@@ -73,7 +73,7 @@
         camera.position.z = 15
         cloydycamera = new THREE.CloudyCameraControls(camera, null);
         controls = new THREE.CloudyKeyControls(cloydycamera, cs);
-        mouseControls = new CloudyMouseControls(cs, cloydycamera);
+        mouseControls = new CloudyMouseControls(cs, cloydycamera, dpManager);
 
         renderer.setClearColor(0x44aaff, 1);
 
@@ -136,7 +136,7 @@
     </div>
     <div class="container">
         <div id="dynamicInfo" class="dynamic-info">
-
+            <b>Some text</b>
         </div>
     </div>
 </body>
