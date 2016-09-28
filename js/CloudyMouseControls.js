@@ -14,6 +14,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 	this.mouseX = 0;
 	this.mouseY = 0;
 	this.lastObjUnderMouse = null;
+	this.contextMenuOn = false;
 
 	this.addCube = function(position)
 	{
@@ -71,7 +72,8 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		
 	}
 
-	this.showContextMenu = function( event ) {
+	this.showContextMenu = function (event) {
+	    this.contextMenuOn = true;
 		var contextMenu = document.getElementById('contextMenu');
 		contextMenu.style.display = 'block';
 		contextMenu.style.left = event.clientX + 'px';
@@ -94,9 +96,10 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		// if ( this.activeLook ) {
 
 			switch ( event.button ) {
-				case 0: 
-					this.addBox(event); 
-					//alert("here");
+			    case 0:
+			        if (this.contextMenuOn == false) {
+					    this.addBox(event); 
+			        }
 					break;
 				case 2:
 					//alert("here");

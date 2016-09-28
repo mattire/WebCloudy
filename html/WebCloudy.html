@@ -75,6 +75,8 @@
         controls = new THREE.CloudyKeyControls(cloydycamera, cs);
         mouseControls = new CloudyMouseControls(cs, cloydycamera, dpManager);
 
+        dpManager.keyControls = mouseControls;
+
         renderer.setClearColor(0x44aaff, 1);
 
         var onWindowResize = function () {
@@ -132,11 +134,19 @@
             Down - shift + s or numpad 2<br>
             Right - shift + d or numpad 6<br>
             Left - shift + a or numpad 4<br>
+            <b>Transparency:</b><br>
+            Toggle - t<br>
         </div>
     </div>
     <div class="container">
         <div id="dynamicInfo" class="dynamic-info">
             <b>Some text</b>
+        </div>
+    </div>
+    <div class="container">
+        <div id="title" class="title">
+            <b>Collada 3d-model browsing<br />
+            in the web, with three.js</b>
         </div>
     </div>
 </body>

@@ -21,3 +21,10 @@
     border: 3px solid #73AD21;
     display: block;
 }
+
+.title {
+    font-size: 25px;
+    position: absolute;
+    top: 40px;
+    left: 20;
+}

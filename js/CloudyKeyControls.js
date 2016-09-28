@@ -92,11 +92,13 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	};
 
 	this.hideContextMenu = function () {
+	    this.contextMenuOn = false;
 	    var menu = document.getElementById("contextMenu");
 	    menu.style.display = 'none';
 	}
 
 	this.showContextMenu = function () {
+	    this.contextMenuOn = true;
 	    var menu = document.getElementById("contextMenu");
 	    //menu.style.margin = 'auto';
 	    

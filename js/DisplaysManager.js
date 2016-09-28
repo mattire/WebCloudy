@@ -1,5 +1,7 @@
 ﻿function DisplayManager() {
 
+    this.keyControls = null;
+
     this.contextItemToDisplayIdMap = {
         "Show key controls list": "controlsList",
         "Add sensor here": "addSensorForm",
@@ -7,6 +9,7 @@
     };
 
     this.menuItemClicked = function (itemText) {
+        this.keyControls.contextMenuOn = false;
         var dispId = this.contextItemToDisplayIdMap[itemText];
         this.toggleDisplay(dispId);
     }
