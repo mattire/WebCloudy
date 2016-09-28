@@ -8,28 +8,28 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	this.toggleTransparency = false;
 
 	this.keyControls = { 
-	    27: ["this", "hideContextMenu"], /*Esc*/
-	    93: ["this", "showContextMenu"], /*context key*/
-	                49: ["cloudyCam", "incSpeed"], /*1*/
-					50: ["cloudyCam", "decSpeed"], /*2*/ 
-					51: ["cloudyCam", "incLookSpeed"], /*3*/
-					52: ["cloudyCam", "decLookSpeed"], /*4*/
-					38: ["cloudyCam", "moveForward"], /*up*/
-					87: ["cloudyCam", "moveForward"], /*W*/ 
-					37: ["cloudyCam", "moveLeft"], /*left*/
-					65: ["cloudyCam", "moveLeft"], /*A*/ 
-					40: ["cloudyCam", "moveBackward"], /*down*/
-					83: ["cloudyCam", "moveBackward"], /*S*/ 
-					39: ["cloudyCam", "moveRight"], /*right*/
-					68: ["cloudyCam", "moveRight"], /*D*/ 
-					82: ["cloudyCam", "moveUp"], /*R*/ 
-					70: ["cloudyCam", "moveDown"], /*F*/ 
-					104: ["cloudyCam", "turnUp"], /*numpad 8*/ 
-					100: ["cloudyCam", "turnLeft"], /*numpad 4*/ 
-					102: ["cloudyCam", "turnRight"], /*numpad 6*/ 
-					98:  ["cloudyCam", "turnDown"], /*numpad 2*/ 
+	                27:  ["this"       , "hideContextMenu"   ], /*Esc*/
+	                93:  ["this"       , "showContextMenu"   ], /*context key*/
+	                49:  ["cloudyCam"  , "incSpeed"          ], /*1*/
+					50:  ["cloudyCam"  , "decSpeed"          ], /*2*/ 
+					51:  ["cloudyCam"  , "incLookSpeed"      ], /*3*/
+					52:  ["cloudyCam"  , "decLookSpeed"      ], /*4*/
+					38:  ["cloudyCam"  , "moveForward"       ], /*up*/
+					87:  ["cloudyCam"  , "moveForward"       ], /*W*/ 
+					37:  ["cloudyCam"  , "moveLeft"          ], /*left*/
+					65:  ["cloudyCam"  , "moveLeft"          ], /*A*/ 
+					40:  ["cloudyCam"  , "moveBackward"      ], /*down*/
+					83:  ["cloudyCam"  , "moveBackward"      ], /*S*/ 
+					39:  ["cloudyCam"  , "moveRight"         ], /*right*/
+					68:  ["cloudyCam"  , "moveRight"         ], /*D*/ 
+					82:  ["cloudyCam"  , "moveUp"            ], /*R*/ 
+					70:  ["cloudyCam"  , "moveDown"          ], /*F*/ 
+					104: ["cloudyCam"  , "turnUp"            ], /*numpad 8*/ 
+					100: ["cloudyCam"  , "turnLeft"          ], /*numpad 4*/ 
+					102: ["cloudyCam"  , "turnRight"         ], /*numpad 6*/ 
+					98:  ["cloudyCam"  , "turnDown"          ], /*numpad 2*/ 
 					84:  ["cloudyScene", "toggleTransparency"], /*T*/
-					76:  ["cloudyScene", "toggleLighting"] /*L*/
+					76:  ["cloudyScene", "toggleLighting"    ] /*L*/
 	};
 	
 	this.keyCtrlControls = { };
