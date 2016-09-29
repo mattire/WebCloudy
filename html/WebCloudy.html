@@ -67,8 +67,8 @@
 
         var geometry = new THREE.BoxGeometry(1, 1, 1);
         var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        var cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        //var cube = new THREE.Mesh(geometry, material);
+        //scene.add(cube);
 
         camera.position.z = 15
         cloydycamera = new THREE.CloudyCameraControls(camera, null);
@@ -99,8 +99,8 @@
             cloydycamera.update(delta);
             cs.update(delta);
             //requestAnimationFrame(render);
-            cube.rotation.x += 0.1;
-            cube.rotation.y += 0.1;
+            //cube.rotation.x += 0.1;
+            //cube.rotation.y += 0.1;
             renderer.render(scene, camera);
         }
 
