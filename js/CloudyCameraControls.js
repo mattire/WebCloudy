@@ -10,7 +10,8 @@
  */
 
 
-THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
+THREE.CloudyCameraControls = function (_object, meshList, domElement, lat, lon) {
+//THREE.CloudyCameraControls = function ( _object, meshList, domElement) {
 
 	//domElement = undefined;
 	this.object = _object;
@@ -18,7 +19,7 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 	this.targetPosition = null;
 	this.objects = meshList;
 
-	this.domElement = ( domElement !== undefined ) ? domElement : document;
+	this.domElement = (domElement !== undefined && domElement !== null) ? domElement : document;
 
 	this.enabled = true;
 
@@ -52,8 +53,9 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 	this.mouseX = 0;
 	this.mouseY = 0;
 
-	this.lat = 0;
-	this.lon = 0;
+	this.lat = (lat !== undefined && lat !== null) ? lat : 0;
+	this.lon = (lon !== undefined && lon !== null) ? lon : 0;
+	//this.lon = 0;
 	this.phi = 0;
 	this.theta = 0;
 
@@ -71,6 +73,8 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 
 	this.viewHalfX = 0;
 	this.viewHalfY = 0;
+
+	this.printOutDebugData = true;
 
 	if ( this.domElement !== document ) {
 		this.domElement.setAttribute( 'tabindex', - 1 );
@@ -146,9 +150,7 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 		var verticalLookRatio = 1;
 
 		if ( this.constrainVertical ) {
-
 			verticalLookRatio = Math.PI / ( this.verticalMax - this.verticalMin );
-
 		}
 		var factor = 700;
 		if (this.turnUp) { this.lat += factor * actualLookSpeed; }
@@ -156,15 +158,13 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 		if (this.turnLeft) { this.lon -= factor * actualLookSpeed; }
 		if (this.turnRight) { this.lon += factor * actualLookSpeed; }
 
-		this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
-		this.phi = THREE.Math.degToRad( 90 - this.lat );
+		this.lat = Math.max(-85, Math.min(85, this.lat));
 
+		this.phi = THREE.Math.degToRad( 90 - this.lat );
 		this.theta = THREE.Math.degToRad( this.lon );
 
 		if ( this.constrainVertical ) {
-
 			this.phi = THREE.Math.mapLinear( this.phi, 0, Math.PI, this.verticalMin, this.verticalMax );
-
 		}
 
 		this.targetPosition = this.target,
@@ -174,7 +174,15 @@ THREE.CloudyCameraControls = function ( _object, meshList, domElement ) {
 		this.targetPosition.y = position.y + 10 * Math.cos( this.phi );
 		this.targetPosition.z = position.z + 10 * Math.sin( this.phi ) * Math.sin( this.theta );
 
-		this.object.lookAt( this.targetPosition );
+		this.object.lookAt(this.targetPosition);
+
+		if (this.printOutDebugData) {
+		    console.log(this.object.position);
+		    //console.log(this.targetPosition);
+		    console.log(this.lon);
+		    console.log(this.lat);
+		    this.printOutDebugData = false;
+        }
 	};	
 
 	this.handleResize();

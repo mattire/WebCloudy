@@ -3467,12 +3467,12 @@ THREE.ColladaLoader = function () {
 
 	ColorOrTexture.prototype.parse = function ( element ) {
 
-		console.log(element.nodeName)
+		//console.log(element.nodeName)
 		if (element.nodeName === 'transparent') {
 
 			this.opaque = element.getAttribute('opaque');
 			// this.opaque = 0.5;
-			console.log(this.opaque)
+			//console.log(this.opaque)
 		}
 
 		for ( var i = 0; i < element.childNodes.length; i ++ ) {
@@ -3660,7 +3660,7 @@ THREE.ColladaLoader = function () {
 
 		if (this['transparency'] !== undefined && this['transparent'] !== undefined) {
 			// convert transparent color RBG to average value
-			console.log('*******************')
+			//console.log('*******************')
 			var transparentColor = this['transparent'];
 			var transparencyLevel = (this.transparent.color.r + this.transparent.color.g + this.transparent.color.b) / 3 * this.transparency;
 

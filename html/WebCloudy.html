@@ -70,8 +70,13 @@
         //var cube = new THREE.Mesh(geometry, material);
         //scene.add(cube);
 
-        camera.position.z = 15
-        cloydycamera = new THREE.CloudyCameraControls(camera, null);
+        //camera.position.set(0, 10, 15);
+        camera.position.set(-49, 47, 18);
+        cloydycamera = new THREE.CloudyCameraControls(camera, null, null, -30, -30);
+        //cloydycamera = new THREE.CloudyCameraControls(camera, null);
+        cloydycamera.lon = -54;
+        cloydycamera.lat = -20;
+
         controls = new THREE.CloudyKeyControls(cloydycamera, cs);
         mouseControls = new CloudyMouseControls(cs, cloydycamera, dpManager);
 
@@ -92,7 +97,7 @@
         var render = function () {
             setTimeout(function () {
                 requestAnimationFrame(render);
-            }, 50);
+            }, 70);
 
             //controls.update(clock.getDelta());
             delta = clock.getDelta()
@@ -103,6 +108,8 @@
             //cube.rotation.y += 0.1;
             renderer.render(scene, camera);
         }
+
+
 
         render();
     </script>
@@ -120,6 +127,18 @@
             </ul>
         </div>
     </div>
+
+    <div class="container">
+        <div id="itemContextMenu" class="item-context-menu">
+            <ul onclick=onContextMenuClick(event);>
+                <li>Remove</li>
+                <li>Show extended information</li>
+                <li>name</li>
+                <li>Value</li>
+            </ul>
+        </div>
+    </div>
+
     <div class="container">
         <div id="controlsList" class="controls-list">
             <b>Move:</b><br>
