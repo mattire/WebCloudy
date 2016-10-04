@@ -28,22 +28,36 @@
     <script src="../js/CloudyCameraControls.js"></script>
     <script src="../js/CloudyKeyControls.js"></script>
     <script src="../js/DisplaysManager.js"></script>
+    <script src="../js/CloudyFacade.js"></script>
     <script>
-        dpManager = new DisplayManager();
+        facade = new CloudyFacade();
+
+        //dpManager = new DisplayManager();
+        facade.setField("display", new DisplayManager());
+
         window.oncontextmenu = function () { return false; }
 
         function onContextMenuClick(event) {
             //alert('cntx');
             //alert(event.target.innerHTML);
-            dpManager.menuItemClicked(event.target.innerHTML);
+            facade.display.menuItemClicked(event.target.innerHTML);
+            var contextMenu = document.getElementById('contextMenu');
+            contextMenu.style.display = 'none';
+        }
+        function onItemContextMenuClick(event) {
+            //alert('cntx');
+            //alert(event.target.innerHTML);
+            facade.display.menuItemClicked(event.target.innerHTML);
             var contextMenu = document.getElementById('contextMenu');
             contextMenu.style.display = 'none';
         }
 
+
+
         var scene = new THREE.Scene();
         //camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
         camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-        //renderer = new THREE.WebGLRenderer({alpha: true});
+
         renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -72,15 +86,15 @@
 
         //camera.position.set(0, 10, 15);
         camera.position.set(-49, 47, 18);
-        cloydycamera = new THREE.CloudyCameraControls(camera, null, null, -30, -30);
-        //cloydycamera = new THREE.CloudyCameraControls(camera, null);
-        cloydycamera.lon = -54;
-        cloydycamera.lat = -20;
+        //facade.setField("cam", new THREE.CloudyCameraControls(camera, null, null, -30, -30));
+        facade.setField("cam", new THREE.CloudyCameraControls(camera, null, null, -20, -54));
+        //facade.cam.lon = -54;
+        //facade.cam.lat = -20;
 
-        controls = new THREE.CloudyKeyControls(cloydycamera, cs);
-        mouseControls = new CloudyMouseControls(cs, cloydycamera, dpManager);
+        controls = new THREE.CloudyKeyControls(facade.cam, cs);
+        mouseControls = new CloudyMouseControls(cs, facade.cam, facade.display);
 
-        dpManager.keyControls = mouseControls;
+        facade.display.keyControls = mouseControls;
 
         renderer.setClearColor(0x44aaff, 1);
 
@@ -101,7 +115,7 @@
 
             //controls.update(clock.getDelta());
             delta = clock.getDelta()
-            cloydycamera.update(delta);
+            facade.cam.update(delta);
             cs.update(delta);
             //requestAnimationFrame(render);
             //cube.rotation.x += 0.1;
@@ -130,7 +144,7 @@
 
     <div class="container">
         <div id="itemContextMenu" class="item-context-menu">
-            <ul onclick=onContextMenuClick(event);>
+            <ul onclick=onItemContextMenuClick(event);>
                 <li>Remove</li>
                 <li>Show extended information</li>
                 <li>name</li>

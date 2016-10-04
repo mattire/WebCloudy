@@ -11,7 +11,7 @@ function CloudyScene(scene_, colladaFile_) {
 	this.scene 			= scene_;
 	this.meshList 		= [];
 	this.edgeList 		= [];
-	this.cloydyDevices 	= [];
+	this.cloudyDevices 	= [];
 	
 	this.transparent 		= false;
 	this.toggleTransparency = false;

@@ -13,7 +13,9 @@
 THREE.CloudyCameraControls = function (_object, meshList, domElement, lat, lon) {
 //THREE.CloudyCameraControls = function ( _object, meshList, domElement) {
 
-	//domElement = undefined;
+    //domElement = undefined;
+    this.facade = null;
+
 	this.object = _object;
 	this.target = new THREE.Vector3( 0, 0, 0 );
 	this.targetPosition = null;

@@ -1,6 +1,7 @@
 ﻿function DisplayManager() {
 
     this.keyControls = null;
+    this.facade = null;
 
     this.contextItemToDisplayIdMap = {
         "Show key controls list": "controlsList",

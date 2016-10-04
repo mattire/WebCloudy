@@ -24,7 +24,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		box.position.copy(position);
 		box.name = "box";
 		this.cloudyScene.scene.add(box);
-		this.cloudyScene.cloydyDevices.push(box);
+		this.cloudyScene.cloudyDevices.push(box);
 	}
 
 	this.addBox = function(event)
@@ -139,7 +139,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		
 	    this.updateRayCast(event);
 
-	    var devIntersects = this.raycaster.intersectObjects(this.cloudyScene.cloydyDevices);
+	    var devIntersects = this.raycaster.intersectObjects(this.cloudyScene.cloudyDevices);
 	    if (devIntersects.length > 0) {
 	        devUnderMouse = devIntersects[0].object;
 	        if (devUnderMouse != this.lastObjUnderMouse) {

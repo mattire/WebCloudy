@@ -30,25 +30,23 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 					98:  ["cloudyCam"  , "turnDown"             ], /*numpad 2*/ 
 					84:  ["cloudyScene", "toggleTransparency"   ], /*T*/
 					76:  ["cloudyScene", "toggleLighting"       ], /*L*/
-                    67:  ["cloudyCam"  , "printOutDebugData"    ] /*c*/
+                    67:  ["cloudyCam"  , "printOutDebugData"    ]  /*c*/
 	};
 	
 	this.keyCtrlControls = { };
 	
 	this.keyShiftControls = {
-					38: "turnUp", /*up*/
-					87: "turnUp", /*W*/ 
-					37: "turnLeft", /*left*/
-					65: "turnLeft", /*A*/
-					40: "turnDown", /*down*/
-					83: "turnDown", /*S*/
+					38: "turnUp",    /*up*/
+					87: "turnUp",    /*W*/ 
+					37: "turnLeft",  /*left*/
+					65: "turnLeft",  /*A*/
+					40: "turnDown",  /*down*/
+					83: "turnDown",  /*S*/
 					39: "turnRight", /*right*/
-					68: "turnRight" /*D*/
+					68: "turnRight"  /*D*/
 	};
 	
 	this.keyUpSkipList = ["toggleTransparency", "toggleLighting", "hideContextMenu", "showContextMenu"];
-	
-
 
 	this.onKeyDown = function ( event ) {
 
@@ -105,8 +103,8 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 	    
 	    contextMenu.style.left = document.body.offsetWidth / 2 + 'px';
 	    contextMenu.style.left = document.body.offsetHeight / 2 + 'px';
-	    contextMenu.style.top = '50px';
-	    menu.style.display = 'block';
+	    contextMenu.style.top  = '50px';
+	    menu.style.display     = 'block';
 	}
 
 	this.dispose = function() {
