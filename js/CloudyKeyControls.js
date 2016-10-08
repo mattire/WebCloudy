@@ -1,37 +1,37 @@
 
 
-THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
+THREE.CloudyKeyControls = function (domElement ) {
 
     this.facade = null;
-	this.cloudyCam = _object; // dont remove!
-	this.cloudyScene = _cScene
+	//this.cloudyCam = _object; // dont remove!
+	//this.cloudyScene = _cScene
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
-	this.toggleTransparency = false;
+	//this.toggleTransparency = false;
 
 	this.keyControls = { 
-	                27:  ["this"       , "hideContextMenu"      ], /*Esc*/
-	                93:  ["this"       , "showContextMenu"      ], /*context key*/
-	                49:  ["cloudyCam"  , "incSpeed"             ], /*1*/
-					50:  ["cloudyCam"  , "decSpeed"             ], /*2*/ 
-					51:  ["cloudyCam"  , "incLookSpeed"         ], /*3*/
-					52:  ["cloudyCam"  , "decLookSpeed"         ], /*4*/
-					38:  ["cloudyCam"  , "moveForward"          ], /*up*/
-					87:  ["cloudyCam"  , "moveForward"          ], /*W*/ 
-					37:  ["cloudyCam"  , "moveLeft"             ], /*left*/
-					65:  ["cloudyCam"  , "moveLeft"             ], /*A*/ 
-					40:  ["cloudyCam"  , "moveBackward"         ], /*down*/
-					83:  ["cloudyCam"  , "moveBackward"         ], /*S*/ 
-					39:  ["cloudyCam"  , "moveRight"            ], /*right*/
-					68:  ["cloudyCam"  , "moveRight"            ], /*D*/ 
-					82:  ["cloudyCam"  , "moveUp"               ], /*R*/ 
-					70:  ["cloudyCam"  , "moveDown"             ], /*F*/ 
-					104: ["cloudyCam"  , "turnUp"               ], /*numpad 8*/ 
-					100: ["cloudyCam"  , "turnLeft"             ], /*numpad 4*/ 
-					102: ["cloudyCam"  , "turnRight"            ], /*numpad 6*/ 
-					98:  ["cloudyCam"  , "turnDown"             ], /*numpad 2*/ 
-					84:  ["cloudyScene", "toggleTransparency"   ], /*T*/
-					76:  ["cloudyScene", "toggleLighting"       ], /*L*/
-                    67:  ["cloudyCam"  , "printOutDebugData"    ]  /*c*/
+	    27:  ["this"       , "hideContextMenu"                  ], /*Esc*/
+	    93:  ["this"       , "showContextMenu"                  ], /*context key*/
+	    49:  ["facade"     , "cam", "incSpeed"                  ], /*1*/
+	    50:  ["facade"     , "cam", "decSpeed"                  ], /*2*/
+	    51:  ["facade"     , "cam", "incLookSpeed"              ], /*3*/
+	    52:  ["facade"     , "cam", "decLookSpeed"              ], /*4*/
+	    38:  ["facade"     , "cam", "moveForward"               ], /*up*/
+	    87:  ["facade"     , "cam", "moveForward"               ], /*W*/
+	    37:  ["facade"     , "cam", "moveLeft"                  ], /*left*/
+	    65:  ["facade"     , "cam", "moveLeft"                  ], /*A*/
+	    40:  ["facade"     , "cam", "moveBackward"              ], /*down*/
+	    83:  ["facade"     , "cam", "moveBackward"              ], /*S*/
+	    39:  ["facade"     , "cam", "moveRight"                 ], /*right*/
+	    68:  ["facade"     , "cam", "moveRight"                 ], /*D*/
+	    82:  ["facade"     , "cam", "moveUp"                    ], /*R*/
+	    70:  ["facade"     , "cam", "moveDown"                  ], /*F*/
+	    104: ["facade"     , "cam", "turnUp"                    ], /*numpad 8*/
+	    100: ["facade"     , "cam", "turnLeft"                  ], /*numpad 4*/
+	    102: ["facade"     , "cam", "turnRight"                 ], /*numpad 6*/
+	    98:  ["facade"     , "cam", "turnDown"                  ], /*numpad 2*/
+	    84:  ["facade"     , "cloudyScene", "toggleTransparency"], /*T*/
+	    76:  ["facade"     , "cloudyScene", "toggleLighting"    ], /*L*/
+	    67:  ["facade"     , "cam"  , "printOutDebugData"       ]  /*c*/
 	};
 	
 	this.keyCtrlControls = { };
@@ -62,14 +62,19 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 			    if (list[0] == "this") {
 			        this[list[1]]();
 			    } else {
-    				this[list[0]][list[1]] = true;
+
+			        // walk objects:
+			        obj = this;
+			        for (var i = 0; i < list.length - 1; i++) {
+			            obj = obj[list[i]];
+			        }
+			        obj[list[list.length-1]] = true;
 			    }
 			}
 		} 
 		if (isShift && !isCtrl) {
 		    camControl = this.keyShiftControls[event.keyCode];
-			//this.cloudyCam[camControl] = true;
-		    this.facade.cloudyCam[camControl] = true;
+		    this.facade.cam[camControl] = true;
 		}
 	};
 
@@ -81,15 +86,20 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 		if(!isShift){
 			list = this.keyControls[event.keyCode];
 			if (list != undefined) {
-				if(this.keyUpSkipList.indexOf(list[1])==-1){
-					this[list[0]][list[1]] = false;
+			    if (this.keyUpSkipList.indexOf(list[1]) == -1) {
+
+                    // walk objects:
+			        obj = this;
+			        for (var i = 0; i < list.length - 1; i++) {
+			            obj = obj[list[i]];
+			        }
+			        obj[list[list.length - 1]] = false;
 				} 
 			}
 		} 
 		if (isShift && !isCtrl) {
 			camControl = this.keyShiftControls[event.keyCode];
-			//this.cloudyCam[camControl] = false;
-			this.facade.cloudyCam[camControl] = false;
+			this.facade.cam[camControl] = false;
 		}
 	};
 
