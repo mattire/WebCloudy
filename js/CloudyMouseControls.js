@@ -1,11 +1,9 @@
 
 
 
-function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
+function CloudyMouseControls(domElement) {
 	
-	this.cloudyScene = cScene;
-	this.cloudyCam = cCam;
-	this.displayManager = dpManager;
+    this.facade = null;
 
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
 	
@@ -23,8 +21,8 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		var box = new THREE.Mesh(geo, mat);
 		box.position.copy(position);
 		box.name = "box";
-		this.cloudyScene.scene.add(box);
-		this.cloudyScene.cloudyDevices.push(box);
+		this.facade.cloudyScene.scene.add(box);
+		this.facade.cloudyScene.cloudyDevices.push(box);
 	}
 
 	this.addBox = function(event)
@@ -41,7 +39,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		camPos.copy(startP);
 		var clickPosition = camPos.add(unitDirVector.multiplyScalar(distance));
 		console.log("cam:");
-		console.log(this.cloudyCam.object.position);
+		console.log(this.facade.cam.object.position);
 		console.log("clic pos:");
 		console.log(clickPosition);
 		return clickPosition;
@@ -50,7 +48,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 	this.rayCastGet = function( event )
 	{
 		
-		var intersects = this.raycaster.intersectObjects( this.cloudyScene.meshList );
+		var intersects = this.raycaster.intersectObjects( this.facade.cloudyScene.meshList );
 		
 		if ( intersects.length > 0 ) {
 
@@ -58,7 +56,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 			console.log(intersects[ 0 ].distance);
 			console.log(SELECTED.geometry.name + ":" + SELECTED.geometry.uuid + ":" + SELECTED.name);
 			//this.clickPositionGuess(intersects[ 0 ].distance, this.raycaster.ray.direction);
-			return this.calcPosition(this.cloudyCam.object.position, this.raycaster.ray.direction, intersects[ 0 ].distance);
+			return this.calcPosition(this.facade.cam.object.position, this.raycaster.ray.direction, intersects[0].distance);
 		}
 		return null;
 	}
@@ -68,7 +66,7 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		var mouse = new THREE.Vector2();
 		mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		this.raycaster.setFromCamera( mouse, this.cloudyCam.object );
+		this.raycaster.setFromCamera(mouse, this.facade.cam.object);
 		
 	}
 
@@ -139,19 +137,19 @@ function CloudyMouseControls(cScene, cCam, dpManager, domElement) {
 		
 	    this.updateRayCast(event);
 
-	    var devIntersects = this.raycaster.intersectObjects(this.cloudyScene.cloudyDevices);
+	    var devIntersects = this.raycaster.intersectObjects(this.facade.cloudyScene.cloudyDevices);
 	    if (devIntersects.length > 0) {
 	        devUnderMouse = devIntersects[0].object;
 	        if (devUnderMouse != this.lastObjUnderMouse) {
 	            this.lastObjUnderMouse = devUnderMouse;
 	            console.log(devUnderMouse.name);
 	            //event.clientX
-	            this.displayManager.setDynamicInfoTextAndPosition(devUnderMouse.name, event.clientX, event.clientY);
-	            this.displayManager.setDisplay("dynamicInfo", 'block');
+	            this.facade.display.setDynamicInfoTextAndPosition(devUnderMouse.name, event.clientX, event.clientY);
+	            this.facade.display.setDisplay("dynamicInfo", 'block');
 	        }
 	    } else {
 	        this.lastObjUnderMouse = null;
-	        this.displayManager.setDisplay("dynamicInfo", 'none');
+	        this.facade.display.setDisplay("dynamicInfo", 'none');
 	    }
 
 	};

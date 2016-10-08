@@ -2,7 +2,8 @@
 
 THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 
-	this.cloudyCam = _object;
+    this.facade = null;
+	this.cloudyCam = _object; // dont remove!
 	this.cloudyScene = _cScene
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
 	this.toggleTransparency = false;
@@ -66,8 +67,9 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 			}
 		} 
 		if (isShift && !isCtrl) {
-			camControl = this.keyShiftControls[event.keyCode];
-			this.cloudyCam[camControl] = true;
+		    camControl = this.keyShiftControls[event.keyCode];
+			//this.cloudyCam[camControl] = true;
+		    this.facade.cloudyCam[camControl] = true;
 		}
 	};
 
@@ -86,7 +88,8 @@ THREE.CloudyKeyControls = function ( _object, _cScene, domElement ) {
 		} 
 		if (isShift && !isCtrl) {
 			camControl = this.keyShiftControls[event.keyCode];
-			this.cloudyCam[camControl] = false;
+			//this.cloudyCam[camControl] = false;
+			this.facade.cloudyCam[camControl] = false;
 		}
 	};
 

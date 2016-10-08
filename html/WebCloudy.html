@@ -54,7 +54,7 @@
 
 
 
-        var scene = new THREE.Scene();
+        
         //camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
         camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
@@ -72,29 +72,20 @@
         renderer.shadowMapDarkness = 0.5;
         renderer.shadowMapWidth = 1024;
         renderer.shadowMapHeight = 1024;
-
         document.body.appendChild(renderer.domElement);
 
-        //var cs = new CloudyScene(scene, "../models/out00.dae");
-        var cs = new CloudyScene(scene, "../models/out00.xml");
-        cs.init();
-
-        var geometry = new THREE.BoxGeometry(1, 1, 1);
-        var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        //var cube = new THREE.Mesh(geometry, material);
-        //scene.add(cube);
+        var scene = new THREE.Scene();
+        facade.setField("cloudyScene", new CloudyScene(scene, "../models/out00.xml"));
+        facade.cloudyScene.init();
 
         //camera.position.set(0, 10, 15);
         camera.position.set(-49, 47, 18);
-        //facade.setField("cam", new THREE.CloudyCameraControls(camera, null, null, -30, -30));
         facade.setField("cam", new THREE.CloudyCameraControls(camera, null, null, -20, -54));
         //facade.cam.lon = -54;
         //facade.cam.lat = -20;
 
-        controls = new THREE.CloudyKeyControls(facade.cam, cs);
-        mouseControls = new CloudyMouseControls(cs, facade.cam, facade.display);
-
-        facade.display.mouseControls = mouseControls;
+        facade.setField("keys", new THREE.CloudyKeyControls(facade.cam, facade.cloudyScene));
+        facade.setField("mouse", new CloudyMouseControls());
 
         renderer.setClearColor(0x44aaff, 1);
 
@@ -113,13 +104,9 @@
                 requestAnimationFrame(render);
             }, 70);
 
-            //controls.update(clock.getDelta());
             delta = clock.getDelta()
             facade.cam.update(delta);
-            cs.update(delta);
-            //requestAnimationFrame(render);
-            //cube.rotation.x += 0.1;
-            //cube.rotation.y += 0.1;
+            facade.cloudyScene.update(delta);
             renderer.render(scene, camera);
         }
 

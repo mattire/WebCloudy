@@ -1,6 +1,5 @@
 ﻿function DisplayManager() {
 
-    this.mouseControls = null;
     this.facade = null;
 
     this.contextItemToDisplayIdMap = {
@@ -10,7 +9,7 @@
     };
 
     this.menuItemClicked = function (itemText) {
-        this.mouseControls.contextMenuOn = false;
+        this.facade.mouse.contextMenuOn = false;
         var dispId = this.contextItemToDisplayIdMap[itemText];
         this.toggleDisplay(dispId);
     }
