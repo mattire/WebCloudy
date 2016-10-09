@@ -3,10 +3,9 @@
 THREE.CloudyKeyControls = function (domElement ) {
 
     this.facade = null;
-	//this.cloudyCam = _object; // dont remove!
-	//this.cloudyScene = _cScene
+
+
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
-	//this.toggleTransparency = false;
 
 	this.keyControls = { 
 	    27:  ["this"       , "hideContextMenu"                  ], /*Esc*/
