@@ -8,10 +8,24 @@
         "Add controller here": "addControllerForm"
     };
 
+    this.contextItemToActionMap = {
+        "Remove all": "removeAllDevices"
+    };
+
     this.menuItemClicked = function (itemText) {
         this.facade.mouse.contextMenuOn = false;
         var dispId = this.contextItemToDisplayIdMap[itemText];
-        this.toggleDisplay(dispId);
+        if (dispId != undefined)
+            this.toggleDisplay(dispId);
+        else {
+            console.log('undefined');
+            var action = this.contextItemToActionMap[itemText];
+            this[action]()
+        }
+    }
+
+    this.removeAllDevices = function () {
+        this.facade.cloudyScene.removeAllDevices();
     }
 
     this.toggleDisplay = function (elementId) {

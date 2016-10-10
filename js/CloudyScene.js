@@ -33,7 +33,7 @@ function CloudyScene(scene_, colladaFile_) {
 
 			dae.traverse(function (child) {
 				if (child instanceof THREE.Mesh) {
-					console.log("It's a mesh!");
+					//console.log("It's a mesh!");
 					child.castShadow = true;
 					child.receiveShadow = true;
 					self.meshList.push(child);
@@ -133,6 +133,15 @@ function CloudyScene(scene_, colladaFile_) {
 			this.changeLighting();
 			this.toggleLighting = false;
 		}		
+	}
+
+	this.removeAllDevices = function () {
+	    self = this;
+	    this.cloudyDevices.forEach(function (device) {
+	        self.scene.remove(device);
+	        
+	    });
+	    this.cloudyDevices = [];
 	}
 	
 }
