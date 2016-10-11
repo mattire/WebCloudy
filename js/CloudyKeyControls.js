@@ -106,6 +106,8 @@ THREE.CloudyKeyControls = function (domElement ) {
 	    this.contextMenuOn = false;
 	    var menu = document.getElementById("contextMenu");
 	    menu.style.display = 'none';
+        var menu = document.getElementById("contextMenu2");
+        menu.style.display = 'none';
 	}
 
 	this.showContextMenu = function () {

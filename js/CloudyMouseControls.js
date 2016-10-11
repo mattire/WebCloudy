@@ -89,9 +89,10 @@ function CloudyMouseControls(domElement) {
 		
 	}
 
-	this.showContextMenu = function (event) {
+	this.showContextMenu = function (event, contextMenuName) {
 	    this.contextMenuOn = true;
-		var contextMenu = document.getElementById('contextMenu');
+		//var contextMenu = document.getElementById('contextMenu');
+		var contextMenu = document.getElementById(contextMenuName);
 		contextMenu.style.display = 'block';
 		contextMenu.style.left = event.clientX + 'px';
 		contextMenu.style.top = event.clientY + 'px';
@@ -128,9 +129,10 @@ function CloudyMouseControls(domElement) {
 				case 2:
 				    //alert("here");
 				    if (this.devUnderMouse != null) {
-				        alert("diff context menu");
+					    this.showContextMenu(event, 'contextMenu2');
+				        //alert("diff context menu");
 				    } else {
-					    this.showContextMenu(event);
+					    this.showContextMenu(event, 'contextMenu');
 					    event.preventDefault();
 					    event.stopPropagation();
 					    return true;
