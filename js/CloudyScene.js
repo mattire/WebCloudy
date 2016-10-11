@@ -78,8 +78,32 @@ function CloudyScene(scene_, colladaFile_) {
 		});
 		
 		this.scene.add(new THREE.AmbientLight(0xcccccc));
+
+		this.addSkybox();
 	} 
 	
+	this.addSkybox = function () {
+	    var imagePrefix = "../skybox/";
+	    //var directions = ["sfront37", "sback37", "stop37", "sbottom37", "sright37", "sleft37"];
+	    var directions = ["sright37", "sfront37", "stop37", "sbottom37", "sleft37", "sback37"];
+	    var directions = ["sright37", "sleft37", "stop37", "sbottom37", "sfront37", "sback37"];
+	    var imageSuffix = ".jpg";
+	    var skyGeometry = new THREE.CubeGeometry(800, 800, 800);
+	    //var skyGeometry = new THREE.CubeGeometry(2500, 2500, 2500);
+	    //var skyGeometry = new THREE.CubeGeometry(5000, 5000, 5000);
+	    //var skyGeometry = new THREE.CubeGeometry(50000, 50000, 50000);
+
+	    var materialArray = [];
+	    for (var i = 0; i < 6; i++)
+	        materialArray.push(new THREE.MeshBasicMaterial({
+	            map: THREE.ImageUtils.loadTexture(imagePrefix + directions[i] + imageSuffix),
+	            side: THREE.BackSide
+	        }));
+	    var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+	    var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+	    this.scene.add(skyBox);
+	}
+
 	this.addEdges = function()
 	{
 		this.meshList.forEach(
