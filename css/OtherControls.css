@@ -30,25 +30,33 @@
 }
 
 .controls {
-    position:absolute;
-    width:100%;
-    bottom:0;
+    position  :absolute;
+    width     :100%;
+    bottom    :0;
     text-align:center;
-    font-size: 25px;
+    font-size : 25px;
 }
 
 .fbcontrols {
-    position:absolute;
-    width:100%;
-    bottom:0;
+    position  :absolute;
+    width     :100%;
+    bottom    :0;
     text-align:left;
-    font-size: 25px;
+    font-size : 25px;
 }
 
 .tcontrols {
-    position:absolute;
-    width:100%;
-    bottom:0;
+    position  :absolute;
+    width     :100%;
+    bottom    :0;
     text-align:right;
-    font-size: 25px;
+    font-size : 25px;
+}
+
+.add-sensor-form {
+    font-size : 25px;
+    position  : absolute;
+    top       : 140px;
+    left      : 120;
+    display   : none;
 }

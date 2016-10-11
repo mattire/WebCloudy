@@ -14,6 +14,7 @@ function CloudyMouseControls(domElement) {
 	this.lastObjUnderMouse = null;
 	this.contextMenuOn = false;
 	this.boxAddDisabled = false;
+	this.devUnderMouse = null;
 
 	this.addMeter = function (position) {
 	    var mesh = null;
@@ -125,11 +126,15 @@ function CloudyMouseControls(domElement) {
 			        break;
                 case 1:
 				case 2:
-					//alert("here");
-					this.showContextMenu(event);
-					event.preventDefault();
-					event.stopPropagation();
-					return true;
+				    //alert("here");
+				    if (this.devUnderMouse != null) {
+				        alert("diff context menu");
+				    } else {
+					    this.showContextMenu(event);
+					    event.preventDefault();
+					    event.stopPropagation();
+					    return true;
+				    }
 					break;
 				//case 0: this.displayObjectInfo = true; break;
 /*
@@ -162,15 +167,16 @@ function CloudyMouseControls(domElement) {
 
 	    var devIntersects = this.raycaster.intersectObjects(this.facade.cloudyScene.cloudyDevices);
 	    if (devIntersects.length > 0) {
-	        devUnderMouse = devIntersects[0].object;
-	        if (devUnderMouse != this.lastObjUnderMouse) {
-	            this.lastObjUnderMouse = devUnderMouse;
-	            console.log(devUnderMouse.name);
+	        this.devUnderMouse = devIntersects[0].object;
+	        if (this.devUnderMouse != this.lastObjUnderMouse) {
+	            this.lastObjUnderMouse = this.devUnderMouse;
+	            console.log(this.devUnderMouse.name);
 	            //event.clientX
-	            this.facade.display.setDynamicInfoTextAndPosition(devUnderMouse.name, event.clientX, event.clientY);
+	            this.facade.display.setDynamicInfoTextAndPosition(this.devUnderMouse.name, event.clientX, event.clientY);
 	            this.facade.display.setDisplay("dynamicInfo", 'block');
 	        }
 	    } else {
+	        this.devUnderMouse = null;
 	        this.lastObjUnderMouse = null;
 	        this.facade.display.setDisplay("dynamicInfo", 'none');
 	    }

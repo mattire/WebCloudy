@@ -34,8 +34,8 @@
         facade = new CloudyFacade();
 
         facade.setField("screenControls", new CloudySceenControls());
-        
-        function onScreenControlMouseDown(event) { facade.screenControls.mouseDown(event); return false;}
+
+        function onScreenControlMouseDown(event) { facade.screenControls.mouseDown(event); return false; }
         function onScreenControlMouseUp(event) { facade.screenControls.mouseUp(event); }
         function onScreenControlMouseOver(event) { facade.screenControls.mouseOver(event); }
         function onScreenControlMouseOut(event) { facade.screenControls.mouseOut(event); }
@@ -55,7 +55,7 @@
 
 
 
-        
+
         //camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
         camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
@@ -160,6 +160,18 @@
             Toggle - t<br>
         </div>
     </div>
+
+    <div class="container">
+        <div id="addSensorForm" class="add-sensor-form">
+            <form>
+                <table>
+                    <tr><td><label>Sensor name:</label></td><td><textarea></textarea></td></tr>
+                </table>
+                <button>Create</button>
+            </form>
+        </div>
+    </div>
+
     <div class="container">
         <div id="dynamicInfo" class="dynamic-info">
             <b>Some text</b>
@@ -167,8 +179,10 @@
     </div>
     <div class="container">
         <div id="title" class="title">
-            <b>Collada 3d-model browsing<br />
-            in the web, with three.js</b>
+            <b>
+                Collada 3d-model browsing<br />
+                in the web, with three.js
+            </b>
         </div>
     </div>
     <div class="container" style="width: 20%">
@@ -179,87 +193,86 @@
                     <tr>
                         <td></td>
                         <td>
-                            <a id         ="screen_tup"
+                            <a id="screen_tup"
                                onmousedown="onScreenControlMouseDown('turnUp');"
-                               onmouseup  ="onScreenControlMouseUp('turnUp');"
+                               onmouseup="onScreenControlMouseUp('turnUp');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('turnUp');"
-                               touchend   ="onScreenControlMouseUp('turnUp');"
-                               width      ="100%">
-                                <img src  ="up.png" style="width: 100%; height: 50%" />
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('turnUp');"
+                               touchend="onScreenControlMouseUp('turnUp');"
+                               width="100%">
+                                <img src="up.png" style="width: 100%; height: 50%" />
                             </a>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td rowspan       ="2">
-                            <a id         ="screen_tleft"
+                        <td rowspan="2">
+                            <a id="screen_tleft"
                                onmousedown="onScreenControlMouseDown('turnLeft');"
-                               onmouseup  ="onScreenControlMouseUp('turnLeft');"
+                               onmouseup="onScreenControlMouseUp('turnLeft');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('turnLeft');"
-                               touchend   ="onScreenControlMouseUp('turnLeft');"
-       
-                               width      ="100%">
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('turnLeft');"
+                               touchend="onScreenControlMouseUp('turnLeft');"
+                               width="100%">
                                 <!--<h1>^</h1>-->
-                                <img src  ="left.png" />
+                                <img src="left.png" />
                             </a>
                         </td>
                         <td>
-                            <a id         ="screen_forward"
+                            <a id="screen_forward"
                                onmousedown="onScreenControlMouseDown('moveForward');"
-                               onmouseup  ="onScreenControlMouseUp('moveForward');"
+                               onmouseup="onScreenControlMouseUp('moveForward');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('moveForward');"
-                               touchend   ="onScreenControlMouseUp('moveForward');"
-                               width      ="100%">
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('moveForward');"
+                               touchend="onScreenControlMouseUp('moveForward');"
+                               width="100%">
                                 <!--<h1>^</h1>-->
-                                <img src  ="up.png" style="width: 100%; height: 50%" />
+                                <img src="up.png" style="width: 100%; height: 50%" />
                             </a>
                         </td>
-                        <td rowspan       ="2">
-                            <a id         ="screen_tright"
+                        <td rowspan="2">
+                            <a id="screen_tright"
                                onmousedown="onScreenControlMouseDown('turnRight');"
-                               onmouseup  ="onScreenControlMouseUp('turnRight');"
+                               onmouseup="onScreenControlMouseUp('turnRight');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('turnRight');"
-                               touchend   ="onScreenControlMouseUp('turnRight');"
-                               width      ="100%">
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('turnRight');"
+                               touchend="onScreenControlMouseUp('turnRight');"
+                               width="100%">
                                 <!--<h1>^</h1>-->
-                                <img src  ="right.png" />
+                                <img src="right.png" />
                             </a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a id         ="screen_backward"
+                            <a id="screen_backward"
                                onmousedown="onScreenControlMouseDown('moveBackward');"
-                               onmouseup  ="onScreenControlMouseUp('moveBackward');"
+                               onmouseup="onScreenControlMouseUp('moveBackward');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('moveBackward');"
-                               touchend   ="onScreenControlMouseUp('moveBackward');"
-                               width      ="100%">
-                                <img src  ="down.png" style="width: 100%; height: 50%" />
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('moveBackward');"
+                               touchend="onScreenControlMouseUp('moveBackward');"
+                               width="100%">
+                                <img src="down.png" style="width: 100%; height: 50%" />
                             </a>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <a id         ="screen_town"
+                            <a id="screen_town"
                                onmousedown="onScreenControlMouseDown('turnDown');"
-                               onmouseup  ="onScreenControlMouseUp('turnDown');"
+                               onmouseup="onScreenControlMouseUp('turnDown');"
                                onmouseover="onScreenControlMouseOver();"
-                               onmouseout ="onScreenControlMouseOut();"
-                               touchstart ="onScreenControlMouseDown('turnDown');"
-                               touchend   ="onScreenControlMouseUp('turnDown');"
-                               width      ="100%">
-                                <img src  ="down.png" style="width: 100%; height: 50%" />
+                               onmouseout="onScreenControlMouseOut();"
+                               touchstart="onScreenControlMouseDown('turnDown');"
+                               touchend="onScreenControlMouseUp('turnDown');"
+                               width="100%">
+                                <img src="down.png" style="width: 100%; height: 50%" />
                             </a>
                         </td>
                         <td></td>
@@ -267,35 +280,10 @@
                 </tbody>
             </table>
 
-            <!--<table>
-            <tr><td><a id="screen_forward"
-                         onmousedown="onScreenControlMouseDown('Forward');" 
-                         onmouseup="onScreenControlMouseUp('Forward');" 
-                         onmouseover="onScreenControlMouseOver();" 
-                         onmouseout="onScreenControlMouseOut();" 
-                         width="100%"><!--<h1>^</h1>
-                            <img src="up.png" />
-            </a></td></tr>
-            <tr><td><a id="screen_backward"
-                           onmousedown="onScreenControlMouseDown('Backward');"
-                           onmouseup="onScreenControlMouseUp('Backward');"
-                           onmouseover="onScreenControlMouseOver();"
-                           onmouseout="onScreenControlMouseOut();"
-                           width="100%">
-                            <img src="down.png" />
-            </a></td></tr>
-
-            </table>-->
         </div>
     </div>
-    <!--<div class="container">
-        <div id="tcontrols" class="tcontrols">
-            <img src="../html/TurnControls.png" />
-        </div>
-    </div>-->
-
-
 
 
 </body>
+
 </html>

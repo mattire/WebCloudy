@@ -30,11 +30,19 @@
 
     this.toggleDisplay = function (elementId) {
         var disp = document.getElementById(elementId);
-        if (disp.style.display == 'block' || disp.style.display == "") {
-            disp.style.display = 'none';
-        } else {
-            disp.style.display = 'block';
+        if (disp.style.display == "") disp.style.display = 'block';
+        try{
+            if (disp.style.display == 'block') { disp.style.display = 'none'; }
+            else                               { disp.style.display = 'block'; }
+        } catch(err){
+            disp.style.display == 'block';
         }
+
+        //if (disp.style.display == 'block' || disp.style.display == "") {
+        //    disp.style.display = 'none';
+        //} else {
+        //    disp.style.display = 'block';
+        //}
     }
 
     this.setDisplay = function (id, disp) {
