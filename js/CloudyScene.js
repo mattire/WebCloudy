@@ -5,7 +5,8 @@
 
  
 function CloudyScene(scene_, colladaFile_) {
- 
+
+    this.facade = null; 
 	colladaFile 		= colladaFile_;
 	loader 				= new THREE.ColladaLoader();
 	this.scene 			= scene_;
@@ -133,6 +134,14 @@ function CloudyScene(scene_, colladaFile_) {
 			this.changeLighting();
 			this.toggleLighting = false;
 		}		
+	}
+
+	this.removeDevice = function () {
+	    //device = this.facade.mouse.lastObjUnderMouse;
+	    device = this.facade.mouse.contextMenuDevice;
+	    this.scene.remove(device);
+	    this.cloudyDevices.splice(this.cloudyDevices.indexOf(device), 1);
+	    //this.cloudyDevices.remove(device);
 	}
 
 	this.removeAllDevices = function () {

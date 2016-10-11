@@ -12,9 +12,10 @@ function CloudyMouseControls(domElement) {
 	this.mouseX = 0;
 	this.mouseY = 0;
 	this.lastObjUnderMouse = null;
-	this.contextMenuOn = false;
-	this.boxAddDisabled = false;
-	this.devUnderMouse = null;
+	this.contextMenuOn     = false;
+	this.boxAddDisabled    = false;
+	this.devUnderMouse     = null;
+	this.contextMenuDevice = null;
 
 	this.addMeter = function (position) {
 	    var mesh = null;
@@ -129,16 +130,17 @@ function CloudyMouseControls(domElement) {
 				case 2:
 				    //alert("here");
 				    if (this.devUnderMouse != null) {
+				        this.contextMenuDevice = this.devUnderMouse;
 					    this.showContextMenu(event, 'contextMenu2');
 				        //alert("diff context menu");
 				    } else {
+                        
 					    this.showContextMenu(event, 'contextMenu');
 					    event.preventDefault();
 					    event.stopPropagation();
 					    return true;
 				    }
 					break;
-				//case 0: this.displayObjectInfo = true; break;
 /*
 				case 0: this.moveForward = true; break;
 				case 2: this.moveBackward = true; break;

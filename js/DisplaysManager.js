@@ -9,8 +9,13 @@
     };
 
     this.contextItemToActionMap = {
-        "Remove all": "removeAllDevices"
+        "Remove all": "removeAllDevices",
+        "Remove": "removeDevice"
     };
+
+    //this.itemContextMenuActionMap = {
+    //    "Remove": "removeDevice"
+    //};
 
     this.menuItemClicked = function (itemText) {
         this.facade.mouse.contextMenuOn = false;
@@ -22,6 +27,10 @@
             var action = this.contextItemToActionMap[itemText];
             this[action]()
         }
+    }
+
+    this.removeDevice = function () {
+        this.facade.cloudyScene.removeDevice();
     }
 
     this.removeAllDevices = function () {
